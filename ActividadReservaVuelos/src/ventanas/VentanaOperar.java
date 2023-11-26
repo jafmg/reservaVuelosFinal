@@ -32,6 +32,8 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 	private String tipoHabitacion = "";
 	private String numPersonas = "";
 	private String contenido = "";
+	public static String[][] vuelos;
+
 
 	// Botones
 	private JCheckBox chckbxReservaVuelo;
@@ -80,6 +82,7 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 	}
 
 	private void inicializarControles() {
+		inicializarTabla();
 
 		// Botones
 		chckbxReservaVuelo = new JCheckBox("Reservar Vuelo");
@@ -408,5 +411,31 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 		}
 		
 		
+	}
+	
+	private void inicializarTabla() {
+			vuelos = new String[][]{
+			
+			{"Barcelona", "6:00", "7:00", "Turista", "300"},
+			{"Barcelona", "7:00", "8:00", "Turista", "300"},
+			{"Barcelona", "8:00", "9:00", "Turista", "300"},
+			{"Barcelona", "9:00", "10:00", "Turista", "300"},
+			{"Barcelona", "10:00", "11:00", "Turista", "300"},
+			{"Barcelona", "11:00", "12:00", "Business", "500"},
+			{"Barcelona", "12:00", "13:00", "Business", "500"},
+			{"Barcelona", "13:00", "14:00", "Business", "500"},
+			{"Barcelona", "14:00", "15:00", "Business", "500"},
+			{"Barcelona", "15:00", "16:00", "Business", "500"},
+			{"Bilbao", "06:00", "7:00", "Turista", "200"},
+			{"Bilbao", "07:00", "8:00", "Turista", "200"},
+			{"Bilbao", "08:00", "9:00", "Turista", "200"},
+			{"Bilbao", "09:00", "10:00", "Business", "400"},
+			{"Bilbao", "10:00", "11:00", "Business", "400"},
+			{"Valencia", "06:00", "7:00", "Turista", "100"},
+			{"Valencia", "07:00", "8:00", "Turista", "100"},
+			{"Valencia", "08:00", "9:00", "Turista", "100"},
+			{"Valencia", "09:00", "10:00", "Business", "200"},
+			{"Valencia", "10:00", "11:00", "Business", "200"}
+		};
 	}
 }

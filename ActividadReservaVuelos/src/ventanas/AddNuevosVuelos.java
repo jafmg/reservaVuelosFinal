@@ -7,11 +7,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
 
 public class AddNuevosVuelos extends JDialog implements ActionListener{
 
@@ -28,6 +28,7 @@ public class AddNuevosVuelos extends JDialog implements ActionListener{
 	private static String clase = "";
 	private static String precio = "";
 	private JButton btnAceptar;
+	private String[][] listaActualizada;
 
 
 
@@ -116,29 +117,17 @@ public class AddNuevosVuelos extends JDialog implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(textFieldOrigen == e.getSource()) {
-			origen = textFieldOrigen.getText();
-		}
-		
-		if(textFieldSalida == e.getSource()) {
-			salida = textFieldSalida.getText();
-		}
-		
-		if(textFieldLlegada == e.getSource()) {
-			llegada = textFieldLlegada.getText();
-		}
-		
-		if(textFieldClase == e.getSource()) {
-			clase = textFieldClase.getText();
-		}
-		
-		if(textFieldPrecio == e.getSource()) {
-			precio = textFieldPrecio.getText();
-		}
+
 		
 		if(btnAceptar == e.getSource()) {
 			if(!textFieldOrigen.getText().equals("") || !textFieldLlegada.getText().equals("") || !textFieldSalida.getText().equals("") || !textFieldClase.getText().equals("") || !textFieldPrecio.getText().equals("")) {
-				addVuelo();
+				origen = textFieldOrigen.getText();
+				salida = textFieldSalida.getText();
+				llegada = textFieldLlegada.getText();
+				clase = textFieldClase.getText();
+				precio = textFieldPrecio.getText();
+				
+				tablaVuelo();
 				dispose();
 			}else {
 				System.out.println("Faltan campos!");
@@ -147,12 +136,36 @@ public class AddNuevosVuelos extends JDialog implements ActionListener{
 		}
 	}
 	
-	private void addVuelo() {
-		DefaultTableModel modelotabla = (DefaultTableModel) VSeleccionVuelos.table.getModel();
+
+	
+	private void tablaVuelo() {
+		listaActualizada = new String[VentanaOperar.vuelos.length+1][VentanaOperar.vuelos[0].length];
 		
-		Object[] datos = {salida, llegada, clase, precio };
+		for(int i = 0; i <VentanaOperar.vuelos.length; i ++) {
+			for(int j = 0; j < VentanaOperar.vuelos[0].length; j++) {
+				listaActualizada[i][j] = VentanaOperar.vuelos[i][j];
+			}
+		}
 		
-		modelotabla.addRow(datos);
+		listaActualizada[listaActualizada.length-1][0] = origen;
+		listaActualizada[listaActualizada.length-1][1] = salida;
+		listaActualizada[listaActualizada.length-1][2] = llegada;
+		listaActualizada[listaActualizada.length-1][3] = clase;
+		listaActualizada[listaActualizada.length-1][4] = precio;
 		
+
+		
+		VentanaOperar.vuelos = new String[listaActualizada.length][listaActualizada[0].length];
+		
+		
+		for(int i = 0; i <listaActualizada.length; i ++) {
+			for(int j = 0; j < listaActualizada[0].length; j++) {
+				VentanaOperar.vuelos[i][j] = listaActualizada[i][j];
+			}
+		}
+		
+
 	}
+	
+	
 }
