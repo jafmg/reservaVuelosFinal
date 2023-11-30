@@ -12,6 +12,7 @@ import java.awt.event.WindowListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -36,6 +37,8 @@ public class VSeleccionVuelos extends JDialog implements ActionListener, WindowL
 	private JTextField textFieldOrigenVuelo;
 	private JLabel labelOrigenVuelo;
 	private int filaSeleccionada;
+	private String si = LogIn.lenguajeSeleccionado[28], no = LogIn.lenguajeSeleccionado[29]; 
+	private Object opciones[] = {si,no};
 
 	
 
@@ -43,7 +46,9 @@ public class VSeleccionVuelos extends JDialog implements ActionListener, WindowL
 	 * Create the dialog.
 	 */
 	public VSeleccionVuelos() {
-		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setResizable(false);
+		setTitle(LogIn.lenguajeSeleccionado[31]);
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setModal(true);
 		addWindowListener(this);
 		setBounds(100, 100, 425, 363);
@@ -51,13 +56,13 @@ public class VSeleccionVuelos extends JDialog implements ActionListener, WindowL
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		labelOrigenVuelo = new JLabel("Seleccione un vuelo con origen: ");
-		labelOrigenVuelo.setBounds(50, 24, 166, 26);
+		labelOrigenVuelo = new JLabel(LogIn.lenguajeSeleccionado[12]);
+		labelOrigenVuelo.setBounds(10, 24, 223, 26);
 		contentPanel.add(labelOrigenVuelo);
 		
 		textFieldOrigenVuelo = new JTextField();
 		textFieldOrigenVuelo.setEditable(false);
-		textFieldOrigenVuelo.setBounds(214, 27, 86, 20);
+		textFieldOrigenVuelo.setBounds(243, 27, 86, 20);
 		contentPanel.add(textFieldOrigenVuelo);
 		textFieldOrigenVuelo.setColumns(10);
 		textFieldOrigenVuelo.setText(VentanaOperar.origen);
@@ -115,7 +120,7 @@ public class VSeleccionVuelos extends JDialog implements ActionListener, WindowL
 					{null, null, null, null},
 				},
 				new String[] {
-					"Hora Salida", "Hora Llegada", "Clase", "Eur"
+					LogIn.lenguajeSeleccionado[13], LogIn.lenguajeSeleccionado[14], LogIn.lenguajeSeleccionado[15], LogIn.lenguajeSeleccionado[16]
 				}
 			) {
 				boolean[] columnEditables = new boolean[] {
@@ -146,7 +151,7 @@ public class VSeleccionVuelos extends JDialog implements ActionListener, WindowL
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				btnAceptar = new JButton("Aceptar");
+				btnAceptar = new JButton(LogIn.lenguajeSeleccionado[17]);
 				btnAceptar.setEnabled(false);
 				btnAceptar.setActionCommand("OK");
 				buttonPane.add(btnAceptar);
@@ -154,7 +159,7 @@ public class VSeleccionVuelos extends JDialog implements ActionListener, WindowL
 				btnAceptar.addActionListener(this);
 			}
 			{
-				btnCancelar = new JButton("Cancel");
+				btnCancelar = new JButton(LogIn.lenguajeSeleccionado[18]);
 				btnCancelar.setActionCommand("Cancel");
 				buttonPane.add(btnCancelar);
 				btnCancelar.addActionListener(this);
@@ -194,14 +199,20 @@ public class VSeleccionVuelos extends JDialog implements ActionListener, WindowL
 	@Override
 	public void windowClosing(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+		int option = JOptionPane.showOptionDialog(null, LogIn.lenguajeSeleccionado[26] , LogIn.lenguajeSeleccionado[27], 
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, null);
+        if (option == JOptionPane.YES_OPTION) {
+            dispose(); 
+        }else {
+        	//do nothing
+        }
 		
 	}
 
 	@Override
 	public void windowClosed(WindowEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(hSalida);
+		
 	}
 
 	@Override
@@ -236,7 +247,6 @@ public class VSeleccionVuelos extends JDialog implements ActionListener, WindowL
 		if(e.getClickCount() == 2) {
 			hSalida = (String) table.getValueAt(filaseleccionada, 0);
 			hLlegada = (String) table.getValueAt(filaseleccionada, 1);
-			System.out.println("hopa" + hSalida );
 			dispose();
 		}
 		
@@ -248,7 +258,7 @@ public class VSeleccionVuelos extends JDialog implements ActionListener, WindowL
 		hLlegada = (String) table.getValueAt(filaseleccionada, 1);
 		 filaPulsadaActual = filaseleccionada;
 		 btnAceptar.setEnabled(true);
-		 System.out.println("if" + hSalida );
+		 
 		}
 		else {
 			if(filaseleccionada == filaPulsadaActual) {
@@ -257,13 +267,13 @@ public class VSeleccionVuelos extends JDialog implements ActionListener, WindowL
 				table.removeRowSelectionInterval(filaseleccionada, filaseleccionada);
 				filaPulsadaActual = -1;
 				btnAceptar.setEnabled(false);
-				System.out.println("else if" + hSalida );
+			
 			}else {
 				hSalida = (String) table.getValueAt(filaseleccionada, 0);
 				hLlegada = (String) table.getValueAt(filaseleccionada, 1);
 				filaPulsadaActual = filaseleccionada;
 				 btnAceptar.setEnabled(true);
-				 System.out.println("else else" + hSalida );
+				 
 			}
 			
 			
@@ -299,9 +309,9 @@ public class VSeleccionVuelos extends JDialog implements ActionListener, WindowL
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
-		if(e.getSource() == btnAceptar) {
+		if(btnAceptar == e.getSource()) {
 			dispose();
-		}else if(e.getSource() == btnCancelar) {
+		}else if(btnCancelar == e.getSource()) {
 			hSalida = "";
 			hLlegada = "";
 			dispose();

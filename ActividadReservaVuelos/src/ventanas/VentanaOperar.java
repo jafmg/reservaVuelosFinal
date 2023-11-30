@@ -58,8 +58,8 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 	private JComboBox comboBoxOrigen;
 	
 	//Otros
-	String si = "Sí", no = "No"; 
-	Object opciones[] = {si,no};
+	private String si = LogIn.lenguajeSeleccionado[28], no = LogIn.lenguajeSeleccionado[29]; 
+	private Object opciones[] = {si,no};
 	private JTextField textFieldErrores;
 	
 	
@@ -68,7 +68,9 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 	 * Create the frame.
 	 */
 	public VentanaOperar() {
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		setTitle(LogIn.lenguajeSeleccionado[30]);
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addWindowListener(this);
 		setBounds(100, 100, 650, 450);
 		contentPane = new JPanel();
@@ -85,51 +87,57 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 		inicializarTabla();
 
 		// Botones
-		chckbxReservaVuelo = new JCheckBox("Reservar Vuelo");
+		chckbxReservaVuelo = new JCheckBox(LogIn.lenguajeSeleccionado[0]);
 		chckbxReservaVuelo.setBounds(32, 51, 123, 23);
 		contentPane.add(chckbxReservaVuelo);
 		chckbxReservaVuelo.addActionListener(this);
 
-		chckbxReservarHabitacion = new JCheckBox("Reservar Habitación");
+		chckbxReservarHabitacion = new JCheckBox(LogIn.lenguajeSeleccionado[5]);
 		chckbxReservarHabitacion.setBounds(373, 51, 143, 23);
 		contentPane.add(chckbxReservarHabitacion);
 		chckbxReservarHabitacion.addActionListener(this);
 
-		rdbtnIndividual = new JRadioButton("Individual");
+		rdbtnIndividual = new JRadioButton(LogIn.lenguajeSeleccionado[6]);
 		rdbtnIndividual.setEnabled(false);
 		buttonGroup.add(rdbtnIndividual);
 		rdbtnIndividual.setBounds(407, 87, 109, 23);
 		contentPane.add(rdbtnIndividual);
 		rdbtnIndividual.addActionListener(this);
 
-		rdbtnDoble = new JRadioButton("Doble");
+		rdbtnDoble = new JRadioButton(LogIn.lenguajeSeleccionado[7]);
 		rdbtnDoble.setEnabled(false);
 		buttonGroup.add(rdbtnDoble);
 		rdbtnDoble.setBounds(407, 124, 109, 23);
 		contentPane.add(rdbtnDoble);
 		rdbtnDoble.addActionListener(this);
 
-		rdbtnMultiple = new JRadioButton("Múltiple");
+		rdbtnMultiple = new JRadioButton(LogIn.lenguajeSeleccionado[8]);
 		rdbtnMultiple.setEnabled(false);
 		buttonGroup.add(rdbtnMultiple);
 		rdbtnMultiple.setBounds(407, 158, 109, 23);
 		contentPane.add(rdbtnMultiple);
 		rdbtnMultiple.addActionListener(this);
 
-		btnAceptar = new JButton("Aceptar");
+		btnAceptar = new JButton(LogIn.lenguajeSeleccionado[10]);
 		btnAceptar.setEnabled(false);
 		btnAceptar.setBounds(427, 377, 89, 23);
 		contentPane.add(btnAceptar);
 		btnAceptar.addActionListener(this);
 
-		btnCancelar = new JButton(LogIn.lenguajeSeleccionado[1]);
+		btnCancelar = new JButton(LogIn.lenguajeSeleccionado[11]);
 		btnCancelar.setBounds(535, 377, 89, 23);
 		contentPane.add(btnCancelar);
 		btnCancelar.addActionListener(this);
 		
-		btnAddNuevoVuelos = new JButton("Añadir nuevos vuelos");
+		btnAddNuevoVuelos = new JButton(LogIn.lenguajeSeleccionado[4]);
+		btnAddNuevoVuelos.setEnabled(false);
 		btnAddNuevoVuelos.setBounds(29, 338, 207, 23);
 		contentPane.add(btnAddNuevoVuelos);
+		if(LogIn.check) {
+			btnAddNuevoVuelos.setVisible(true);
+		}else {
+			btnAddNuevoVuelos.setVisible(false);
+		}
 		btnAddNuevoVuelos.addActionListener(this);
 		
 
@@ -151,34 +159,40 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 		comboBoxOrigen.addActionListener(this);
 		comboBoxOrigen.addFocusListener(this);
 		
-		btnCheckVuelos = new JButton(LogIn.lenguajeSeleccionado[0]);
+		btnCheckVuelos = new JButton(LogIn.lenguajeSeleccionado[3]);
+		btnCheckVuelos.setEnabled(false);
 		btnCheckVuelos.setBounds(20, 262, 148, 23);
 		contentPane.add(btnCheckVuelos);
 		
-		LabelHSalida = new JLabel("Hora Salida");
-		LabelHSalida.setBounds(41, 146, 77, 14);
+		LabelHSalida = new JLabel(LogIn.lenguajeSeleccionado[1]);
+		LabelHSalida.setBounds(20, 146, 105, 14);
 		contentPane.add(LabelHSalida);
 		
-		LabelHLlegada = new JLabel("Hora llegada");
-		LabelHLlegada.setBounds(41, 198, 77, 14);
+		LabelHLlegada = new JLabel(LogIn.lenguajeSeleccionado[2]);
+		LabelHLlegada.setBounds(20, 198, 98, 14);
 		contentPane.add(LabelHLlegada);
 		
 		textFieldHSalida = new JTextField();
+		textFieldHSalida.setDisabledTextColor(Color.BLACK);
 		textFieldHSalida.setEnabled(false);
 		textFieldHSalida.setBounds(135, 143, 86, 20);
 		contentPane.add(textFieldHSalida);
 		textFieldHSalida.setColumns(10);
 		
 		textFieldHLlegada = new JTextField();
+		textFieldHLlegada.setDisabledTextColor(Color.BLACK);
 		textFieldHLlegada.setEnabled(false);
 		textFieldHLlegada.setBounds(135, 195, 86, 20);
 		contentPane.add(textFieldHLlegada);
 		textFieldHLlegada.setColumns(10);
 		
 		textFieldErrores = new JTextField();
-		textFieldErrores.setEditable(false);
+		textFieldErrores.setBorder(null);
+		textFieldErrores.setDisabledTextColor(Color.RED);
 		textFieldErrores.setEnabled(false);
-		textFieldErrores.setBounds(407, 231, 201, 20);
+		textFieldErrores.setForeground(Color.RED);
+		textFieldErrores.setEditable(false);
+		textFieldErrores.setBounds(331, 231, 277, 20);
 		contentPane.add(textFieldErrores);
 		textFieldErrores.setColumns(10);
 		
@@ -198,9 +212,12 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 			if (chckbxReservaVuelo.isSelected()) {
 				btnAceptar.setEnabled(true);
 				comboBoxOrigen.setEnabled(true);
+				btnAddNuevoVuelos.setEnabled(true);
+				btnCheckVuelos.setEnabled(true);
 				
 			} else {
-				
+				btnAddNuevoVuelos.setEnabled(false);
+				btnCheckVuelos.setEnabled(false);
 				comboBoxOrigen.setEnabled(false);
 				if (!chckbxReservarHabitacion.isSelected()) {
 					btnAceptar.setEnabled(false);
@@ -218,6 +235,7 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 				rdbtnIndividual.setEnabled(false);
 				rdbtnDoble.setEnabled(false);
 				rdbtnMultiple.setEnabled(false);
+				textFieldMultiple.setText("");
 				if (!chckbxReservaVuelo.isSelected()) {
 					btnAceptar.setEnabled(false);
 				}
@@ -233,6 +251,7 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 
 		} else if (rdbtnDoble.isSelected() || rdbtnIndividual.isSelected()) {
 			textFieldMultiple.setEnabled(false);
+			textFieldMultiple.setText("");
 			textFieldErrores.setText("");
 			btnAceptar.setEnabled(true);
 
@@ -241,26 +260,22 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 		if(rdbtnIndividual.isSelected() && (!rdbtnDoble.isSelected() || (!rdbtnMultiple.isSelected()))){
 			tipoHabitacion = "Individual";
 			numPersonas = "1";
-			System.out.println(tipoHabitacion + " " + numPersonas);
+			
 		}else if(rdbtnDoble.isSelected() && (!rdbtnIndividual.isSelected() || (!rdbtnMultiple.isSelected()))) {
 			tipoHabitacion = "Doble";
 			numPersonas = "2";
-			System.out.println(tipoHabitacion + " " + numPersonas);
+			
 		}
 		
 		if(textFieldMultiple == e.getSource()) {
 			
 			tipoHabitacion = "Multiple";
 			numPersonas = textFieldMultiple.getText();
-			System.out.println(tipoHabitacion + " " + numPersonas);
+			
 			
 		}
 		
-//		if(rdbtnMultiple.isSelected() && (!rdbtnIndividual.isSelected() || (!rdbtnDoble.isSelected()))) {
-//			tipoHabitacion = "Multiple";
-//			numPersonas = "X";
-//			System.out.println(tipoHabitacion + " " + numPersonas);
-//		}
+
 		
 		if(btnCancelar == e.getSource()) {
 			System.exit(0);
@@ -277,14 +292,17 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 		}
 		
 		if(btnAceptar == e.getSource()) {
-			
+			if(!textFieldHSalida.getText().equals("") && !tipoHabitacion.equals("") && !numPersonas.equals("") ) {
 			JOptionPane.showMessageDialog(rootPane, "Has reservado un vuelo desde " + origen + " a las " + textFieldHSalida.getText() + " y una habitación \n" +
 			tipoHabitacion + " para " + numPersonas + " personas");
+			}else {
+				JOptionPane.showMessageDialog(rootPane, "Faltan campos por rellenar");
+			}
 			
 		}
 		
 		if(comboBoxOrigen == e.getSource()) {
-			System.out.println("Prueba");
+			
 			String ciudad = (String)comboBoxOrigen.getSelectedItem();
 			if(origen.equals(ciudad)) {
 				textFieldHLlegada.setText("");
@@ -309,11 +327,13 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 	@Override
 	public void windowClosing(WindowEvent e) {
 		// TODO Auto-generated method stub
-		int option = JOptionPane.showOptionDialog(null, "¿Desea cerrar la ventana?", "Confirmar cierre", 
+		int option = JOptionPane.showOptionDialog(null, LogIn.lenguajeSeleccionado[26] , LogIn.lenguajeSeleccionado[27], 
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, null);
         if (option == JOptionPane.YES_OPTION) {
-            dispose(); // Cierra la ventana
-        } //revisar
+            dispose(); 
+        }else {
+        	//do nothing
+        }
 	}
 
 	@Override
@@ -356,7 +376,7 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 			if(tecla.equals("\b")) {
 				if(contenido.length() >0) {
 				contenido = contenido.substring(0, contenido.length()-1);
-				System.out.println(contenido);
+				
 				}else {
 					
 				}
@@ -365,17 +385,17 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 			}
 			
 			
-			System.out.println(contenido);
+			
 			if(contenido.matches("^[0-9]+$")) {
 				
 				textFieldMultiple.setForeground(Color.BLACK);
 				textFieldErrores.setText("");
-				System.out.println("correcto");
+				
 				btnAceptar.setEnabled(true);
 			}else {
 				textFieldErrores.setForeground(Color.RED);
 				textFieldMultiple.setForeground(Color.RED);
-				textFieldErrores.setText("El campo múltiple solo puede contener números");
+				textFieldErrores.setText(LogIn.lenguajeSeleccionado[9]);
 				btnAceptar.setEnabled(false);
 			}
 			
@@ -407,7 +427,7 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 		if(textFieldMultiple == e.getSource()) {
 			tipoHabitacion = "Multiple";
 			numPersonas = textFieldMultiple.getText();
-			System.out.println(tipoHabitacion + " " + numPersonas);
+			
 		}
 		
 		

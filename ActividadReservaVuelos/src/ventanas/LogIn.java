@@ -24,6 +24,7 @@ public class LogIn extends JDialog implements ActionListener {
     public static String[] esp;
     public static String[] eng;
     public static String[] lenguajeSeleccionado = new String[2];
+    public static boolean check = false;
 	private final JPanel contentPanel = new JPanel();
 	JFormattedTextField formattedTextFieldUser;
 	JLabel LabelUser;
@@ -40,6 +41,8 @@ public class LogIn extends JDialog implements ActionListener {
 	 * Create the dialog.
 	 */
 	public LogIn() {
+		setResizable(false);
+		setTitle("Log in");
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -112,14 +115,15 @@ public class LogIn extends JDialog implements ActionListener {
 		
 		if(formattedTextFieldUser.getText().equals(ADMIN_USERNAME)) {
 			if(pass.equals(ADMIN_USERNAME)) {
+				check = true;
 				lenguajeSeleccionado = tablaslenguaEng();
 				VentanaOperar vo = new VentanaOperar();
 				vo.setVisible(true);
 				
-				System.out.println(lenguajeSeleccionado[0]);
+				
 				dispose();
 			}else {
-				JOptionPane.showMessageDialog(rootPane, "Error password");
+				JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta");
 			}
 		}else if(formattedTextFieldUser.getText().equals(EMPLOYEE_USERNAME)) {
 			if(pass.equals(EMPLOYEE_USERNAME)) {
@@ -129,7 +133,7 @@ public class LogIn extends JDialog implements ActionListener {
 				
 				dispose();
 			}else {
-				JOptionPane.showMessageDialog(rootPane, "Error password");
+				JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta");
 			}
 		}else {
 			JOptionPane.showMessageDialog(rootPane, "Usuario no encontrado");
@@ -139,8 +143,40 @@ public class LogIn extends JDialog implements ActionListener {
 	private String[] tablasLenguaEsp() {
 		
 		esp = new String[] {
-				"Comprobar Vuelos",
-				"Cancelar"
+				"Reservar Vuelo",
+				"Hora salida",
+				"Hora llegada",
+				"Comprobar vuelos",
+				"Añadir un vuelo",
+				"Reservar Habitación",
+				"Individual",
+				"Doble",
+				"Múltiple",
+				"El campo múltiple solo puede contener números",
+				"Aceptar",
+				"Cancelar",
+				"Seleccione un vuelo con origen: ",
+				"Hora salida",
+				"Hora llegada",
+				"Clase",
+				"Eur",
+				"Aceptar",
+				"Cancelar",
+				"Origen",
+				"Hora salida",
+				"Hora llegada",
+				"Clase",
+				"Precio",
+				"Aceptar",
+				"Cancelar",
+				"¿Desea cerrar la ventana?",
+				"Confirmar cierre",
+				"Sí",
+				"No",
+				"Reserva",
+				"Selección vuelos",
+				"Añadir vuelos"
+				
 		};
 		
 		return esp;
@@ -148,8 +184,39 @@ public class LogIn extends JDialog implements ActionListener {
 	
 	private String[] tablaslenguaEng() {
 		eng = new String[] {
-				"Check Flights",
-				"Cancel"
+				"Book flight",
+				"Departure time",
+				"Arrival Time",
+				"Check flights",
+				"Add new flight",
+				"Book room",
+				"Single",
+				"Double",
+				"Many",
+				"The ‘many’ field can only contain numbers",
+				"Ok",
+				"Cancel",
+				"Select a flight departure from: ",
+				"Departure time",
+				"Arrival time",
+				"Type",
+				"Eur",
+				"Ok",
+				"Cancel",
+				"From",
+				"Departure time",
+				"Arrival time",
+				"Type",
+				"Cost",
+				"Ok",
+				"Cancel",
+				"¿Do you want to close the window?",
+				"Close Confirmation",
+				"Yes",
+				"No",
+				"Book",
+				"Flight Selection",
+				"Add Flight",
 		};
 		
 		return eng;
