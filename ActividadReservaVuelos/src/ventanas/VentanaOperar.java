@@ -45,6 +45,7 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 	private JButton btnCancelar;
 	private JButton btnCheckVuelos;
 	private JButton btnAddNuevoVuelos;
+	JButton btnCerrarSesion;
 	
 
 	// Campos
@@ -140,6 +141,10 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 		}
 		btnAddNuevoVuelos.addActionListener(this);
 		
+		btnCerrarSesion = new JButton(LogIn.lenguajeSeleccionado[33]);
+		btnCerrarSesion.setBounds(501, 11, 123, 23);
+		contentPane.add(btnCerrarSesion);
+		btnCerrarSesion.addActionListener(this);
 
 		// Campos
 		textFieldMultiple = new JTextField();
@@ -199,6 +204,8 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 		
 		
 		
+		
+		
 //		comboBoxOrigen.addActionListener(this);
 		btnCheckVuelos.addActionListener(this);
 
@@ -214,6 +221,8 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 				comboBoxOrigen.setEnabled(true);
 				btnAddNuevoVuelos.setEnabled(true);
 				btnCheckVuelos.setEnabled(true);
+				comboBoxOrigen.setSelectedItem(comboBoxOrigen.getSelectedItem());
+
 				
 			} else {
 				btnAddNuevoVuelos.setEnabled(false);
@@ -314,6 +323,14 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 			
 			AddNuevosVuelos nv = new AddNuevosVuelos();
 			nv.setVisible(true);
+		}
+		
+		if(btnCerrarSesion == e.getSource()) {
+			limpiarVariables();
+			LogIn login = new LogIn();
+			
+			login.setVisible(true);
+			dispose();
 		}
 
 	}
@@ -457,5 +474,21 @@ public class VentanaOperar extends JFrame implements ActionListener, WindowListe
 			{"Valencia", "09:00", "10:00", "Business", "200"},
 			{"Valencia", "10:00", "11:00", "Business", "200"}
 		};
+	}
+	
+	private void limpiarVariables() {
+		tipoHabitacion = "";
+		numPersonas = "";
+		contenido = "";
+		origen = "";
+		VSeleccionVuelos.hSalida = "";
+		VSeleccionVuelos.hLlegada = "";
+		
+		for(int i = 0; i < vuelos.length; i++) {
+			for(int j = 0; j <vuelos[0].length; j++) {
+				vuelos[i][j] = "";
+			}
+		}
+		
 	}
 }

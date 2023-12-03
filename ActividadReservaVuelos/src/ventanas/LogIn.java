@@ -175,7 +175,8 @@ public class LogIn extends JDialog implements ActionListener {
 				"No",
 				"Reserva",
 				"Selección vuelos",
-				"Añadir vuelos"
+				"Añadir vuelos",
+				"Cerrar sesión"
 				
 		};
 		
@@ -217,6 +218,7 @@ public class LogIn extends JDialog implements ActionListener {
 				"Book",
 				"Flight Selection",
 				"Add Flight",
+				"Log Out"
 		};
 		
 		return eng;
